@@ -75,7 +75,9 @@ func Retry[T any](ctx context.Context, operation Operation[T], opts ...RetryOpti
 
 	// Apply user-provided options to the default settings.
 	for _, opt := range opts {
-		opt(args)
+		if opt != nil {
+			opt(args)
+		}
 	}
 
 	defer args.Timer.Stop()
